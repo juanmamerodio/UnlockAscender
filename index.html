@@ -1,179 +1,184 @@
 <!DOCTYPE html>
 <html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Gervasio Astapenco - Transforma tu Pasión en Arte</title>
+    <title>Atelier Gervasio Astapenco - El Arte de Crear</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
     <header class="hero">
-        <div class="hero-content animate-on-scroll">
-            <img src="URL_DEL_LOGO_O_FOTO_PERFIL" alt="Logo Atelier Gervasio Astapenco" class="profile-pic">
-            <h1 class="main-title">Gervasio Astapenco</h1>
-            <p class="subtitle">Transformamos tu pasión por el arte en técnica y expresión.</p>
-            <a href="#contacto" class="cta-button">Agenda tu Llamada de Descubrimiento</a>
-            <div class="arrow-down">
-                <i data-feather="arrow-down"></i>
-            </div>
+        <div class="hero-background">
+             <img src="dia-del-autismo-con-un-retrato-colorido.jpg" alt="Obra de Gervasio Astapenco">
+        </div>
+        <div class="hero-content">
+            <h1 class="main-title" data-splitting>Gervasio Astapenco</h1>
+            <p class="subtitle">Donde la técnica se encuentra con el alma.</p>
+            <a href="#contacto" class="cta-button">Inicia tu Viaje Artístico</a>
         </div>
     </header>
 
-    <main>
-        <section id="beneficios" class="section-container animate-on-scroll">
-            <h2 class="section-title">¿Qué Obtienes al Formarte Conmigo?</h2>
+    <main class="main-container">
+        <section class="manifesto-section">
+            <div class="manifesto-text animate-on-scroll">
+                <p>Creemos que cada persona lleva un artista dentro. Mi misión no es enseñarte a copiar, sino a <span>liberar tu propia voz</span> sobre el lienzo. A transformar la frustración en expresión y la duda en maestría.</p>
+            </div>
+            <div class="manifesto-image-container">
+                <img src="w.jpg" alt="Detalle de pinceladas" class="manifesto-image">
+            </div>
+        </section>
+
+
+        <section id="beneficios" class="section-container">
+            <h2 class="section-title animate-on-scroll">Lo Que Despertarás</h2>
             <div class="benefits-grid">
-                <div class="benefit-card">
-                    <i data-feather="award" class="benefit-icon"></i>
-                    <h3>Dominio Técnico</h3>
-                    <p>Aprende las técnicas de los grandes maestros, desde la base hasta el hiperrealismo.</p>
+                <div class="benefit-card animate-on-scroll">
+                    <img src="a.jpg">
+                    <div class="card-content">
+                        <h3>Técnica Maestra</h3>
+                        <p>Del carboncillo al óleo, domina los secretos de la luz, la sombra y el color que dan vida a tus creaciones.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <i data-feather="eye" class="benefit-icon"></i>
-                    <h3>Visión Artística</h3>
-                    <p>Desarrolla tu propia voz y estilo, encontrando la esencia única en tu obra.</p>
+                <div class="benefit-card animate-on-scroll">
+                     <img src="y.jpg" alt="Obra de alumno 2">
+                     <div class="card-content">
+                        <h3>Visión Propia</h3>
+                        <p>Más allá de la técnica, encontrarás tu lenguaje artístico único, esa firma inconfundible en cada obra.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <i data-feather="trending-up" class="benefit-icon"></i>
-                    <h3>Crecimiento Profesional</h3>
-                    <p>Convierte tu arte en una carrera. Te guío para que tu talento sea reconocido y rentable.</p>
+                <div class="benefit-card animate-on-scroll">
+                     <img src="z.jpg" alt="Obra de alumno 3">
+                     <div class="card-content">
+                        <h3>Carrera Artística</h3>
+                        <p>Te daré las herramientas para construir tu portafolio, valorar tu arte y presentarlo al mundo con confianza.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="sobre-nosotros" class="section-container about-section animate-on-scroll">
-            <div class="about-image">
-                <img src="URL_FOTO_DE_GERVASIO" alt="Gervasio Astapenco en su atelier">
-            </div>
-            <div class="about-text">
-                <h2 class="section-title">Mi Misión es Tu Arte</h2>
-                <p>Con más de [Número] años de experiencia y una profunda pasión por la enseñanza, mi atelier no es solo un lugar para aprender a pintar. Es un espacio de transformación. Mi método combina la disciplina clásica con la libertad creativa, asegurando que cada alumno no solo pinte bien, sino que sienta y viva cada pincelada.</p>
-                <p>He formado a decenas de artistas que hoy exponen, venden y viven de su pasión. Mi compromiso es contigo y tu crecimiento.</p>
+        <section id="sobre-nosotros" class="section-container about-section">
+             <div class="about-image-wrapper animate-on-scroll">
+                <div class="about-image-bg"></div>
+                <img src="URL_FOTO_DE_GERVASIO_PINTANDO" alt="Gervasio Astapenco pintando en su taller">
+             </div>
+             <div class="about-text animate-on-scroll">
+                <h2 class="section-title">Soy Gervasio Astapenco</h2>
+                <p>Artista y mentor. Mi taller es un santuario para la creatividad, un lugar donde el rigor técnico y la experimentación van de la mano. He dedicado mi vida a perfeccionar mi arte, pero mi mayor obra es ver florecer el talento de mis alumnos.</p>
+                <a href="#contacto" class="link-styled">Hablemos de tu arte <i data-feather="arrow-right"></i></a>
+             </div>
+        </section>
+
+        <section id="soluciones" class="section-container dark-section">
+            <h2 class="section-title animate-on-scroll">El Método del Atelier</h2>
+            <div class="solutions-wrapper">
+                 <div class="solution-item animate-on-scroll">
+                    <span class="solution-number">01</span>
+                    <div class="solution-content">
+                        <h3>Inmersión y Fundamentos</h3>
+                        <p>Construimos una base sólida. Entenderás el porqué detrás de cada trazo, el lenguaje universal de la composición y el color.</p>
+                    </div>
+                </div>
+                <div class="solution-item animate-on-scroll">
+                    <span class="solution-number">02</span>
+                    <div class="solution-content">
+                        <h3>Desarrollo y Experimentación</h3>
+                        <p>Aquí es donde rompes las reglas que ya dominas. Exploramos estilos, técnicas mixtas y te empujo a encontrar tu voz.</p>
+                    </div>
+                </div>
+                <div class="solution-item animate-on-scroll">
+                    <span class="solution-number">03</span>
+                    <div class="solution-content">
+                        <h3>Profesionalización y Vuelo</h3>
+                        <p>Tu arte está listo para ser visto. Creamos tu marca personal, tu portafolio y trazamos la estrategia para tu carrera.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="ganancias" class="section-container dark-section animate-on-scroll">
-            <h2 class="section-title">El Valor de Tu Talento</h2>
-            <p class="section-subtitle">Tu arte tiene el potencial de generar más que aplausos.</p>
-            <div class="stats-container">
-                <div class="stat-item">
-                    <span class="stat-number">+200%</span>
-                    <span class="stat-label">Incremento Promedio en el Valor de Obras de Alumnos</span>
+        <section id="testimonios" class="section-container testimonial-section">
+            <h2 class="section-title animate-on-scroll">Voces del Taller</h2>
+            <div class="testimonial-container animate-on-scroll">
+                <div class="testimonial-card active">
+                    <p>"Gervasio no solo me enseñó a pintar, me enseñó a ver como un artista. Mi confianza y mi técnica han mejorado exponencialmente."</p>
+                    <span class="testimonial-author">- Lucía Fernández</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">78%</span>
-                    <span class="stat-label">De Alumnos Avanzados Venden su Primera Obra en 6 Meses</span>
+                <div class="testimonial-card">
+                    <p>"Pasé de pintar como un hobby a vender mis primeras obras gracias a la mentoría. El enfoque en la profesionalización es único."</p>
+                    <span class="testimonial-author">- Marcos Giménez</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">+10</span>
-                    <span class="stat-label">Exposiciones Colectivas Realizadas con Éxito</span>
+                 <div class="testimonial-card">
+                    <p>"La paciencia y el profundo conocimiento de Gervasio son incomparables. Cada clase es una revelación."</p>
+                    <span class="testimonial-author">- Ana Clara Rossi</span>
+                </div>
+                <div class="slider-nav">
+                    <button class="prev"><i data-feather="arrow-left"></i></button>
+                    <button class="next"><i data-feather="arrow-right"></i></button>
                 </div>
             </div>
         </section>
         
-        <section id="soluciones" class="section-container animate-on-scroll">
-            <h2 class="section-title">Un Camino Completo para el Artista</h2>
-            <div class="solutions-wrapper">
-                <div class="solution-item">
-                    <div class="solution-icon"><i data-feather="pen-tool"></i></div>
-                    <div class="solution-content">
-                        <h3>Formación Integral</h3>
-                        <p>Desde el dibujo básico y la teoría del color hasta técnicas avanzadas de óleo y composición. Un programa paso a paso.</p>
+        <section id="contacto" class="section-container cta-final-section">
+            <div class="form-container animate-on-scroll">
+                <h2 class="section-title">¿Tu lienzo te está llamando?</h2>
+                <p class="section-subtitle">Si sientes un impulso irrefrenable por crear, estás en el lugar correcto. Completa el formulario para agendar una charla y descubrir si el Atelier es tu próximo paso.</p>
+                <form id="qualify-form" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required placeholder="Nombre">
                     </div>
-                </div>
-                <div class="solution-item">
-                    <div class="solution-icon"><i data-feather="briefcase"></i></div>
-                    <div class="solution-content">
-                        <h3>Desarrollo de Carrera</h3>
-                        <p>Te enseñamos a crear tu portafolio, poner precio a tus obras, contactar galerías y utilizar redes sociales para promocionar tu arte.</p>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required placeholder="Email">
                     </div>
-                </div>
-                <div class="solution-item">
-                    <div class="solution-icon"><i data-feather="users"></i></div>
-                    <div class="solution-content">
-                        <h3>Comunidad y Networking</h3>
-                        <p>Accede a un círculo exclusivo de artistas, coleccionistas y mentores para impulsar tu crecimiento y visibilidad.</p>
+                     <div class="form-group">
+                        <input type="text" id="instagram" name="instagram" required placeholder="@usuario de Instagram">
                     </div>
+                    <div class="form-group full-width">
+                        <textarea id="challenge" name="challenge" rows="4" required placeholder="¿Cuál es tu mayor anhelo o desafío artístico en este momento?"></textarea>
+                    </div>
+                    <button type="submit" class="cta-button full-width">Enviar Aplicación</button>
+                </form>
+                <div id="form-success-message" class="hidden">
+                    <p>Gracias. Tu mensaje ha comenzado su viaje. Pronto tendrás noticias mías.</p>
                 </div>
             </div>
         </section>
 
-        <section id="testimonios" class="section-container animate-on-scroll">
-            <h2 class="section-title">Lo que dicen mis Alumnos</h2>
-            <div class="testimonial-slider">
-                </div>
-            <div class="slider-nav">
-                <button class="prev"><i data-feather="arrow-left"></i></button>
-                <button class="next"><i data-feather="arrow-right"></i></button>
-            </div>
-        </section>
-
-        <section id="contacto" class="section-container cta-final-section animate-on-scroll">
-            <h2 class="section-title">¿Listo para Elevar tu Arte al Siguiente Nivel?</h2>
-            <p class="section-subtitle">Completa este breve formulario. Si tu perfil encaja, agendaremos una llamada estratégica de 15 minutos para trazar tu plan de crecimiento artístico.</p>
-            <form id="qualify-form" class="contact-form">
-                <div class="form-group">
-                    <input type="text" id="name" name="name" required placeholder="Tu Nombre Completo">
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" required placeholder="Tu Mejor Correo Electrónico">
-                </div>
-                 <div class="form-group">
-                    <input type="text" id="instagram" name="instagram" required placeholder="Tu Perfil de Instagram (@usuario)">
-                </div>
-                <div class="form-group">
-                    <label>¿Cuál es tu mayor desafío artístico ahora mismo?</label>
-                    <textarea id="challenge" name="challenge" rows="4" required placeholder="Ej: No logro que mis retratos se vean realistas, me cuesta encontrar mi estilo, no sé cómo vender mis obras..."></textarea>
-                </div>
-                <button type="submit" class="cta-button">Enviar y Aplicar para la Llamada</button>
-            </form>
-            <div id="form-success-message" class="hidden">
-                <p>¡Gracias! Hemos recibido tu aplicación. Nos pondremos en contacto contigo pronto si calificas para la llamada. Revisa tu correo.</p>
-            </div>
-        </section>
-
-        <section id="faqs" class="section-container animate-on-scroll">
-            <h2 class="section-title">Preguntas Frecuentes</h2>
+        <section id="faqs" class="section-container faq-section">
+            <h2 class="section-title animate-on-scroll">Preguntas Comunes</h2>
             <div class="faq-container">
-                <div class="faq-item">
+                <div class="faq-item animate-on-scroll">
                     <div class="faq-question">
                         <span>¿Necesito experiencia previa?</span>
-                        <i data-feather="chevron-down"></i>
+                        <i data-feather="plus"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>No. Mis programas están diseñados para acompañar tanto a principiantes que nunca han tomado un pincel como a artistas con experiencia que buscan perfeccionar su técnica y profesionalizar su carrera.</p>
+                        <p>No. La única experiencia que necesitas es la de sentir pasión por el arte. El método se adapta a tu punto de partida, desde cero hasta niveles avanzados.</p>
                     </div>
                 </div>
-                <div class="faq-item">
+                <div class="faq-item animate-on-scroll">
                     <div class="faq-question">
                         <span>¿Las clases son online o presenciales?</span>
-                        <i data-feather="chevron-down"></i>
+                        <i data-feather="plus"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Ofrezco modalidades tanto presenciales en mi atelier como programas de mentoría online personalizados para adaptarme a tus necesidades y ubicación.</p>
+                        <p>Ofrezco modalidades tanto presenciales en el corazón del atelier como programas de mentoría online personalizados que nos conectan sin importar la distancia.</p>
                     </div>
                 </div>
-                <div class="faq-item">
+                 <div class="faq-item animate-on-scroll">
                     <div class="faq-question">
-                        <span>¿Qué materiales necesito para empezar?</span>
-                        <i data-feather="chevron-down"></i>
+                        <span>¿Cuál es el valor de la formación?</span>
+                        <i data-feather="plus"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Una vez que definamos tu camino en la llamada de descubrimiento, te proporcionaré una lista detallada de materiales recomendados, optimizada para que inviertas solo en lo esencial y de la mejor calidad para tu nivel.</p>
-                    </div>
-                </div>
-                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Cuál es el costo de la formación?</span>
-                        <i data-feather="chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>La inversión varía según el programa (mentoría personalizada, cursos grupales, etc.). El objetivo de la llamada es precisamente entender tus metas para ofrecerte el plan que te dará el mayor retorno, tanto artístico como profesional.</p>
+                        <p>La inversión depende de tu camino. La llamada inicial sirve para entender tus metas y diseñar un plan a medida, asegurando que cada paso sea una inversión en tu futuro como artista.</p>
                     </div>
                 </div>
             </div>
@@ -182,10 +187,12 @@
     </main>
     
     <footer class="footer">
-        <p>&copy; 2024 Atelier Gervasio Astapenco. Todos los derechos reservados.</p>
+        <p>Gervasio Astapenco</p>
+        <h3>El Arte es el Territorio de la Libertad.</h3>
         <div class="social-links">
             <a href="https://www.instagram.com/atelier_gervasio_astapenco/" target="_blank"><i data-feather="instagram"></i></a>
-            </div>
+        </div>
+         <p class="copyright">&copy; 2024 Atelier Gervasio Astapenco. Creado con pasión.</p>
     </footer>
 
     <script src="script.js"></script>
