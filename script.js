@@ -1,105 +1,56 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
 
-    // ===== GSAP Y SCROLLTRIGGER PARA ANIMACIONES AVANZADAS =====
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animación del fondo del Hero (Parallax)
-    gsap.to(".hero-background img", {
-        scale: 1,
-        scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-        }
-    });
-
-    // Animación general de elementos al hacer scroll
-    const scrollElements = document.querySelectorAll('.animate-on-scroll');
-    scrollElements.forEach(el => {
-        gsap.fromTo(el, 
-            { opacity: 0, y: 50 },
-            { 
-                opacity: 1, 
-                y: 0, 
-                duration: 1,
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 85%",
-                    toggleActions: "play none none none"
-                }
+    // --- ANIMACIONES AL HACER SCROLL ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Opcional: dejar de observar el elemento una vez que fue animado
+                // observer.unobserve(entry.target);
             }
-        );
+        });
+    }, {
+        rootMargin: '0px',
+        threshold: 0.1 // El elemento se activa cuando el 10% es visible
     });
-    
-    // ===== LÓGICA DE FAQs =====
+
+    // Seleccionar todos los elementos que quiero animar
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach(el => observer.observe(el));
+
+
+    // --- FUNCIONALIDAD DEL ACORDEÓN DE FAQs ---
     const faqItems = document.querySelectorAll('.faq-item');
+
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        const icon = item.querySelector('i');
-
+        
         question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            
+            // Cerrar otros items abiertos para que solo uno esté activo
             faqItems.forEach(otherItem => {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.faq-answer').style.maxHeight = 0;
-                otherItem.querySelector('i').setAttribute('data-feather', 'plus');
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
             });
 
-            if (!isActive) {
-                item.classList.add('active');
-                const answer = item.querySelector('.faq-answer');
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-                icon.setAttribute('data-feather', 'minus');
-            }
-            feather.replace(); // Actualizar el ícono
+            // Abrir o cerrar el item actual
+            item.classList.toggle('active');
         });
     });
 
-    // ===== LÓGICA DE TESTIMONIOS =====
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    const nextBtn = document.querySelector('.slider-nav .next');
-    const prevBtn = document.querySelector('.slider-nav .prev');
-    let currentTestimonial = 0;
+    // --- MANEJO DEL FORMULARIO ---
+    const form = document.querySelector('.contact-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevenimos el envío real para este ejemplo
 
-    function showTestimonial(index) {
-        testimonialCards.forEach((card, i) => {
-            card.classList.remove('active');
-        });
-        testimonialCards[index].classList.add('active');
-    }
-
-    nextBtn.addEventListener('click', () => {
-        currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
-        showTestimonial(currentTestimonial);
-    });
-
-    prevBtn.addEventListener('click', () => {
-        currentTestimonial = (currentTestimonial - 1 + testimonialCards.length) % testimonialCards.length;
-        showTestimonial(currentTestimonial);
-    });
-
-    // Cambio automático
-    setInterval(() => {
-        nextBtn.click();
-    }, 7000);
-
-
-    // ===== LÓGICA DEL FORMULARIO =====
-    const form = document.getElementById('qualify-form');
-    const successMessage = document.getElementById('form-success-message');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+        // Acá podrías conectar un servicio como Formspree, Netlify Forms o tu propio backend
+        const formData = new FormData(form);
+        const name = formData.get('nombre');
         
-        // Simulación de envío
-        const formContainer = document.querySelector('.form-container');
-        form.style.display = 'none';
-        successMessage.classList.remove('hidden');
-        formContainer.style.textAlign = 'center'; // Centrar el mensaje
+        // Simulación de envío exitoso
+        alert(`¡Gracias por contactarnos, ${name}! Te vamos a escribir pronto para coordinar la llamada. ¡A darle gas!`);
+        
+        form.reset(); // Limpia el formulario
     });
 
-    // Inicializar Feather Icons
-    feather.replace();
 });
