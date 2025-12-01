@@ -1,221 +1,488 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desbloquea Ascender - La guía completa</title>
+    <title>Desbloquea Ascender | Tu Camino está Incompleto</title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
+    <!-- Preconexión -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fuente Inter y Playfair Display (para toques de elegancia) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="Ascender icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#2E4B43',
+                            dark: '#1F332D',
+                            light: '#E8F5E9',
+                            gold: '#D4AF37',
+                            accent: '#F5F5F0'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 40px -10px rgba(46, 75, 67, 0.25)',
+                        'card': '0 20px 40px -15px rgba(0, 0, 0, 0.1)',
+                        'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.3)',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
     
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
     <style>
-        /* Estilos personalizados para complementar Tailwind */
+        /* Estilos personalizados */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDFBF8; /* Blanco levemente cálido */
+            background-color: #FDFBF8;
             color: #1a202c;
-        }
-        span{
-            font-weight: bold;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Colores personalizados de la marca */
-        .brand-green { color: #2E4B43; }
-        .bg-brand-green { background-color: #2E4B43; }
-        .border-brand-green { border-color: #2E4B43; }
-        .hover\:bg-brand-green-dark:hover { background-color: #243a34; }
-        
-        /* Animaciones de entrada */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
         .reveal-visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Gradientes y Efectos de Texto */
+        .text-gradient {
+            background: linear-gradient(135deg, #2E4B43 0%, #4a7a6c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #D4AF37 0%, #b89220 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Barra de Progreso Hipnótica */
+        .progress-bar-stripes {
+            background-image: linear-gradient(45deg,rgba(255,255,255,.2) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.2) 75%,transparent 75%,transparent);
+            background-size: 20px 20px;
+            animation: move-stripes 1s linear infinite;
+        }
+
+        @keyframes move-stripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 0; }
+        }
+
+        /* Blur elegante para contenido bloqueado */
+        .glass-lock {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Patrón de fondo sutil */
+        .bg-grid-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232E4B43' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+        }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased flex flex-col min-h-screen bg-brand-accent">
 
-    <!-- ========== HEADER ========== -->
-    <header class="sticky top-0 z-50 bg-[#FDFBF8]/80 backdrop-blur-lg border-b border-gray-200/50">
-        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <a href="#" class="flex items-center space-x-2">
-                    <img class="h-10 md:h-10 w-auto" src="Ascender icon.png" alt="Logo Ascender">
-                    <span class="text-2xl font-bold brand-green">Ascender</span>
-                </a>
-                <!-- CTA Button -->
-            </div>
-        </div>
-    </header>
+    <!-- Sticky Bar de Urgencia (Scarcity Bias) -->
+    <div class="fixed top-0 w-full z-[60] bg-brand-green text-white text-xs font-semibold py-2 text-center shadow-lg transform transition-transform duration-300" id="sticky-bar">
+        <span class="animate-pulse mr-2">🔥</span> 
+        Los cupos de preventa se están agotando. Asegurá los $32.99 antes de que suba.
+    </div>
 
-    <!-- ========== MAIN CONTENT ========== -->
-    <main>
+    <!-- ========== HERO SECTION (Zeigarnik Effect + Ego) ========== -->
+    <section class="pt-28 pb-20 relative overflow-hidden bg-white rounded-b-[3rem] shadow-card">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
 
-        <!-- ========== HERO SECTION ========== -->
-        <section class="py-20 md:py-32">
-            <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-                <div class="reveal">
-                    <h1 class="text-4xl md:text-6xl font-extrabold brand-green leading-tight tracking-tighter">
-                        Viste el comienzo de todo..
-                        <span class="block bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-green-800">sin inversión, no hay futuro.</span>
-                    </h1>
-                    <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
-                       En Ascender, regalamos AI's que trabajan para vos 24/7, modulos repletos de valor, comunidad de discord, videos pregrabados, entre otras cosas de absoluto valor. Queda en vos si querés invertir en lo mas importante..<span> Vos mismo</span>.
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            
+            <!-- Barra de Progreso "Unfinished Business" -->
+            <div class="bg-white p-6 rounded-2xl shadow-glow border border-gray-100 mb-10 reveal transform hover:scale-[1.01] transition-transform duration-300">
+                <div class="flex justify-between items-end mb-3">
+                    <div class="text-left">
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1">Estado del Estudiante</span>
+                        <span class="text-brand-green font-bold text-lg">Iniciado (Incompleto)</span>
+                    </div>
+                    <span class="text-3xl font-black text-brand-green">20%</span>
                 </div>
                 
-                <div class="mt-12 reveal" style="transition-delay: 200ms;">
-                    <a href="#precio-final" class="inline-block bg-brand-green text-white font-bold text-xl px-12 py-6 rounded-full hover:bg-brand-green-dark transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-green-900/40">
-                        QUIERO ENTRAR EN ASCENDER
+                <div class="h-6 w-full bg-gray-100 rounded-full overflow-hidden shadow-inner p-1">
+                    <div class="h-full bg-gradient-to-r from-green-600 to-brand-green w-[20%] rounded-full shadow-md progress-bar-stripes relative flex items-center justify-end pr-2">
+                        <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+                
+                <p class="text-sm text-gray-500 mt-4 font-medium flex items-center justify-center gap-2">
+                    <i data-feather="alert-circle" class="w-4 h-4 text-orange-500"></i>
+                    <span class="italic">Tu cerebro odia dejar las cosas a medias. Completalo.</span>
+                </p>
+            </div>
+
+            <div class="reveal delay-100">
+                <span class="inline-block py-1 px-4 rounded-full bg-green-50 text-brand-green text-xs font-bold tracking-widest uppercase mb-6 border border-brand-green/10">
+                    Preview Finalizada
+                </span>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-brand-green leading-tight tracking-tight mb-6">
+                    Ya tenés la chispa. <br>
+                    <span class="text-gradient">Te falta el fuego.</span>
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-600 leading-relaxed font-light">
+                    Viste los Módulos 1 y 2. Ya sabés que esto es real. Pero la motivación sola no paga las cuentas. 
+                    <br><strong class="font-semibold text-brand-green">Sin estrategia de ventas, solo tenés un hobby caro.</strong>
+                </p>
+            </div>
+            
+            <div class="mt-10 reveal delay-200">
+                <a href="#precio-final" class="group relative inline-flex items-center justify-center bg-brand-green text-white font-bold text-xl px-12 py-5 rounded-full hover:bg-brand-dark transition-all duration-300 shadow-xl shadow-brand-green/30 hover:-translate-y-1">
+                    <span class="relative z-10 flex items-center gap-3">
+                        QUIERO TERMINAR LO QUE EMPECÉ
+                        <i data-feather="arrow-down" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== AUTHORITY & STORYTELLING (Relatability Bias) ========== -->
+    <section class="py-24 bg-brand-accent relative">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Imagen / Visual -->
+                <div class="relative reveal group cursor-default">
+                    <div class="absolute inset-0 bg-brand-green rounded-3xl rotate-3 opacity-10 group-hover:rotate-6 transition-transform duration-500"></div>
+                    <div class="relative bg-white p-2 rounded-3xl shadow-card">
+                         <!-- Placeholder mejorado para la imagen de Juan -->
+                        <img src="juanbondareprofilephoto.jpg" alt="Juan Bondare" class="rounded-2xl w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" onerror="this.src='https://placehold.co/500x600/2E4B43/FDFBF8?text=Juan+Bondare'">
+                        
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl border border-gray-100 flex flex-col items-center">
+                            <span class="text-3xl font-black text-brand-green">+500M</span>
+                            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">Visualizaciones</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Copy de Autoridad -->
+                <div class="reveal delay-100">
+                    <h2 class="text-sm font-bold text-brand-gold uppercase tracking-widest mb-2">Mi Historia Real</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-brand-green mb-6 leading-tight">
+                        "Empecé con un Samsung A03 roto y mucho miedo."
+                    </h3>
+                    <div class="space-y-4 text-gray-600 leading-relaxed">
+                        <p>
+                            No soy un gurú que nació en cuna de oro. Soy un pibe que entendió el juego. 
+                            Me estafaron, fracasé con mi primera agencia y estuve perdido sin saber qué hacer con mi vida.
+                        </p>
+                        <p class="font-medium text-gray-800 border-l-4 border-brand-green pl-4">
+                            Pero descubrí algo: <span class="italic">Tu marca personal es el único activo que nadie te puede quitar.</span>
+                        </p>
+                        <p>
+                            Junto a <strong>Juan Manuel Merodio</strong> (el cerebro detrás de las ventas y el sistema Delta), empaquetamos años de golpes y aprendizajes en <strong>Ascender</strong>. 
+                            No te vendemos humo. Te vendemos el atajo que a nosotros nos hubiera gustado tener.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== THE GAP (Curiosity & Deprivation Bias) ========== -->
+    <section class="py-24 bg-white relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto reveal mb-16">
+                <span class="text-brand-gold text-5xl font-serif italic mb-4 block">"The Gap"</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-green">Lo que separa a los curiosos de los que facturan</h2>
+                <p class="mt-4 text-gray-600">Lo que viste gratis (Módulos 1-2) es la base. Lo que está bloqueado (Módulos 3-10) es el edificio.</p>
+            </div>
+
+            <!-- Grid de Módulos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                <!-- Módulos Vistos (Confirmation Bias) -->
+                <div class="bg-green-50/50 p-6 rounded-2xl border border-green-100 opacity-60 hover:opacity-100 transition-opacity">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-3xl font-black text-green-200">01</span>
+                        <i data-feather="check-circle" class="text-green-600 w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-brand-green">Mentalidad</h4>
+                    <p class="text-xs text-gray-500 mt-1">Ya sabés por qué hacés esto.</p>
+                </div>
+                
+                <div class="bg-green-50/50 p-6 rounded-2xl border border-green-100 opacity-60 hover:opacity-100 transition-opacity">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-3xl font-black text-green-200">02</span>
+                        <i data-feather="check-circle" class="text-green-600 w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-brand-green">Fundaciones</h4>
+                    <p class="text-xs text-gray-500 mt-1">Ya tenés la disciplina base.</p>
+                </div>
+
+                <!-- EL ABISMO (Bloqueados) -->
+                
+                <!-- Card Bloqueada Standard -->
+                <div class="relative group p-6 rounded-2xl border border-gray-100 bg-gray-50 overflow-hidden reveal">
+                    <div class="absolute inset-0 glass-lock z-10 flex flex-col items-center justify-center opacity-90 transition-all duration-300 group-hover:opacity-100">
+                        <div class="bg-white p-3 rounded-full shadow-lg mb-2 group-hover:scale-110 transition-transform">
+                            <i data-feather="lock" class="w-5 h-5 text-red-500"></i>
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Bloqueado</span>
+                    </div>
+                    <div class="filter blur-[3px]">
+                        <span class="text-3xl font-black text-gray-200">03</span>
+                        <h4 class="font-bold text-gray-800 mt-2">Nicho de Mercado</h4>
+                        <p class="text-xs text-gray-500 mt-1">Dejar de hablarle a la pared y hablarle al que paga.</p>
+                    </div>
+                </div>
+
+                <!-- Card Bloqueada Standard -->
+                <div class="relative group p-6 rounded-2xl border border-gray-100 bg-gray-50 overflow-hidden reveal delay-75">
+                    <div class="absolute inset-0 glass-lock z-10 flex flex-col items-center justify-center opacity-90">
+                        <div class="bg-white p-3 rounded-full shadow-lg mb-2">
+                            <i data-feather="lock" class="w-5 h-5 text-red-500"></i>
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Bloqueado</span>
+                    </div>
+                    <div class="filter blur-[3px]">
+                        <span class="text-3xl font-black text-gray-200">04</span>
+                        <h4 class="font-bold text-gray-800 mt-2">Tu Servicio</h4>
+                        <p class="text-xs text-gray-500 mt-1">Cómo empaquetar tu cerebro.</p>
+                    </div>
+                </div>
+
+                <!-- MÓDULO ESTRELLA (Offers) - Destacado -->
+                <div class="relative group col-span-1 lg:col-span-2 p-8 rounded-2xl border-2 border-brand-green/10 bg-gradient-to-br from-gray-50 to-green-50/30 overflow-hidden reveal delay-100 shadow-lg">
+                    <div class="absolute inset-0 glass-lock z-10 flex flex-col items-center justify-center opacity-90">
+                        <div class="bg-brand-green text-white px-5 py-2 rounded-full shadow-xl mb-3 flex items-center gap-2 transform group-hover:scale-105 transition-transform">
+                            <i data-feather="lock" class="w-4 h-4"></i>
+                            <span class="text-sm font-bold">MÓDULO DE VENTAS (CRÍTICO)</span>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-500">Sin esto, no facturás</span>
+                    </div>
+                    <div class="filter blur-[4px] opacity-60">
+                        <div class="flex items-center gap-4">
+                            <span class="text-6xl font-black text-gray-300">05</span>
+                            <div>
+                                <h4 class="text-2xl font-bold text-brand-green">Ofertas Irresistibles</h4>
+                                <p class="text-sm text-gray-600 mt-1">Psicología aplicada para que el precio sea irrelevante.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resto de Módulos (Agrupados para efecto de "Mucho Valor") -->
+                <div class="relative group col-span-1 lg:col-span-2 p-8 rounded-2xl border border-gray-100 bg-gray-50 overflow-hidden reveal delay-150 text-center">
+                    <div class="absolute inset-0 glass-lock z-10 flex flex-col items-center justify-center opacity-95">
+                        <i data-feather="layers" class="w-10 h-10 text-gray-400 mb-3"></i>
+                        <h4 class="font-bold text-gray-700 text-lg">+ 5 Módulos Avanzados</h4>
+                        <p class="text-xs text-gray-500 mt-2 max-w-xs mx-auto">Contenido Viral, Setting (Vender por DM), Embudos Automáticos, Sesgos Cognitivos y Escalado.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Nurturing: Bonus Stack -->
+            <div class="mt-16 bg-brand-green/5 rounded-3xl p-8 md:p-12 text-center border border-brand-green/10 reveal">
+                <h3 class="text-2xl font-bold text-brand-green mb-6">Y además, desbloqueás el Ecosistema Completo:</h3>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                        <i data-feather="users" class="text-brand-green w-5 h-5"></i>
+                        <span class="font-medium text-gray-700">Comunidad Discord</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                        <i data-feather="cpu" class="text-brand-green w-5 h-5"></i>
+                        <span class="font-medium text-gray-700">IAs y Prompts</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                        <i data-feather="database" class="text-brand-green w-5 h-5"></i>
+                        <span class="font-medium text-gray-700">Plantillas Notion</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                        <i data-feather="mic" class="text-brand-green w-5 h-5"></i>
+                        <span class="font-medium text-gray-700">Podcast Privado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COST OF INACTION (Loss Aversion) ========== -->
+    <section class="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-200">El Costo de No Hacer Nada</h2>
+            <p class="text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto">
+                Podés cerrar esta pestaña y volver a tu rutina. Scrollear Instagram, ver cómo otros crecen, y decirte a vos mismo "ya voy a arrancar".
+                <br><br>
+                Pero el tiempo no para. <span class="text-white font-bold">Cada día que pasás sin marca personal, es plata que dejás sobre la mesa.</span>
+                <br>
+                No dejes que tu potencial se oxide.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== PRICING (Anchor & Urgency) ========== -->
+    <section id="precio-final" class="py-24 bg-white relative">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-gradient-to-br from-brand-green to-brand-dark rounded-[3rem] shadow-2xl p-8 md:p-16 text-center text-white relative overflow-hidden reveal hover:shadow-glow transition-shadow duration-500">
+                
+                <!-- Decoración -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-gold opacity-10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+                <h2 class="text-3xl md:text-5xl font-extrabold mb-4 relative z-10">
+                    Tu Futuro Vale Más que una Cena.
+                </h2>
+                <p class="text-green-100 text-lg mb-10 relative z-10">
+                    Estás a un click de tener el mapa completo.
+                </p>
+
+                <!-- Pricing Card -->
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 max-w-lg mx-auto border border-white/20 relative z-10">
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 mb-8">
+                        
+                        <!-- Anchor Price -->
+                        <div class="text-center opacity-60">
+                            <p class="text-xs uppercase tracking-widest font-bold mb-1">Valor Real</p>
+                            <p class="text-2xl font-serif line-through decoration-red-400 decoration-2">$870 USD</p>
+                        </div>
+
+                        <!-- Real Price -->
+                        <div class="text-center transform scale-110">
+                            <span class="bg-brand-gold text-brand-dark text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block">Oferta Preventa</span>
+                            <div class="flex items-start justify-center text-white">
+                                <span class="text-2xl font-bold mt-2">$</span>
+                                <span class="text-7xl font-black tracking-tighter">32</span>
+                                <div class="flex flex-col items-start mt-2">
+                                    <span class="text-3xl font-bold">99</span>
+                                    <span class="text-sm font-medium opacity-70">USD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://unlock.ascender.uno/checkout" class="w-full block bg-white text-brand-green font-bold text-xl px-8 py-5 rounded-full hover:bg-brand-gold hover:text-white transition-all duration-300 shadow-lg transform hover:-translate-y-1">
+                        DESBLOQUEAR TODO AHORA
                     </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ========== LOCKED MODULES SECTION ========== -->
-        <section class="py-20 md:py-10 bg-white rounded-t-3xl md:rounded-t-[2rem]">
-            <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-                <div class="text-center max-w-3xl mx-auto reveal">
-                    <h2 class="text-3xl md:text-5xl font-bold brand-green">Esto es lo que te estás perdiendo...</h2>
-                    <p class="mt-4 text-lg text-gray-600">Cada módulo bloqueado es una pieza clave del rompecabezas. Sin ellas, solo tienes una fracción de la imagen.</p>
-                </div>
-
-                <div class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                    <!-- Module Visto -->
-                    <div class="bg-green-50/50 p-6 rounded-3xl b order border-green-200/80 reveal text-center opacity-60">
-                        <i data-feather="check-circle" class="w-12 h-12 mx-auto text-green-500"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 1: Decisión</h3>
-                        <p class="mt-1 text-sm text-gray-500">Visto</p>
-                    </div>
-                     <!-- Module Visto -->
-                    <div class="bg-green-50/50 p-6 rounded-3xl border border-green-200/80 reveal text-center opacity-60" style="transition-delay: 50ms;">
-                        <i data-feather="check-circle" class="w-12 h-12 mx-auto text-green-500"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 2: Fundaciones</h3>
-                         <p class="mt-1 text-sm text-gray-500">Visto</p>
-                    </div>
-
-                    <!-- Module Bloqueado -->
-                    <div class="bg-[#FDFBF8] p-6 rounded-3xl border border-gray-200/60 shadow-lg shadow-gray-300/20 reveal text-center" style="transition-delay: 100ms;">
-                        <i data-feather="lock" class="w-12 h-12 mx-auto brand-green"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 3: Nicho</h3>
-                        <p class="mt-1 text-sm text-gray-500">Encontras tu Publico objetivo (ORO).</p>
-                    </div>
-                     <!-- Module Bloqueado -->
-                    <div class="bg-[#FDFBF8] p-6 rounded-3xl border border-gray-200/60 shadow-lg shadow-gray-300/20 reveal text-center" style="transition-delay: 150ms;">
-                        <i data-feather="lock" class="w-12 h-12 mx-auto brand-green"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 4: Servicios</h3>
-                         <p class="mt-1 text-sm text-gray-500">Empaquetas tu conocimiento.</p>
-                    </div>
-                     <!-- Module Bloqueado -->
-                    <div class="bg-[#FDFBF8] p-6 rounded-3xl border border-gray-200/60 shadow-lg shadow-gray-300/20 reveal text-center" style="transition-delay: 200ms;">
-                        <i data-feather="lock" class="w-12 h-12 mx-auto brand-green"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 5: Offers</h3>
-                         <p class="mt-1 text-sm text-gray-500">Jamas te van a decir "no".</p>
-                    </div>
-                     <!-- Module Bloqueado -->
-                    <div class="bg-[#FDFBF8] p-6 rounded-3xl border border-gray-200/60 shadow-lg shadow-gray-300/20 reveal text-center" style="transition-delay: 250ms;">
-                        <i data-feather="lock" class="w-12 h-12 mx-auto brand-green"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 6: Contenido</h3>
-                         <p class="mt-1 text-sm text-gray-500">Atracción de clientes potenciales.</p>
-                    </div>
-                     <!-- Module Bloqueado -->
-                    <div class="bg-[#FDFBF8] p-6 rounded-3xl border border-gray-200/60 shadow-lg shadow-gray-300/20 reveal text-center" style="transition-delay: 300ms;">
-                        <i data-feather="lock" class="w-12 h-12 mx-auto brand-green"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 7: Prospección</h3>
-                         <p class="mt-1 text-sm text-gray-500">Buscas tu cliente ideal.</p>
-                    </div>
-                    <div class="bg-[#FDFBF8] p-6 rounded-3xl border border-gray-200/60 shadow-lg shadow-gray-300/20 reveal text-center" style="transition-delay: 300ms;">
-                        <i data-feather="lock" class="w-12 h-12 mx-auto brand-green"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 8: Embudos</h3>
-                         <p class="mt-1 text-sm text-gray-500">Vendés y agendás en automático.</p>
-                    </div>
-                    <div class="bg-[#FDFBF8] p-6 rounded-3xl border border-gray-200/60 shadow-lg shadow-gray-300/20 reveal text-center" style="transition-delay: 300ms;">
-                        <i data-feather="lock" class="w-12 h-12 mx-auto brand-green"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 9: Sesgos y Estrategias (SesEst)</h3>
-                         <p class="mt-1 text-sm text-gray-500">Optimización completa y cambio de paradigmas.</p>
-                    </div>
-                     <!-- Module Bloqueado -->
-                    <div class="bg-[#FDFBF8] p-6 rounded-3xl border border-gray-200/60 shadow-lg shadow-gray-300/20 reveal text-center" style="transition-delay: 350ms;">
-                        <i data-feather="lock" class="w-12 h-12 mx-auto brand-green"></i>
-                        <h3 class="mt-4 text-lg font-bold brand-green">Módulo 10: Cierre y Ascender</h3>
-                         <p class="mt-1 text-sm text-gray-500">Lo joya de ascender: Entendiendo la meta.</p>
-                    </div>
-                </div>
-                 <div class="mt-12 text-center reveal">
-                    <p class="text-lg text-gray-700 italic">Y esto es nada. Te estan esperando los bonos, la comunidad, las IAs...</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- ========== PRICING / FINAL CTA SECTION ========== -->
-        <section id="precio-final" class="py-20 md:py-28">
-            <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-                <div class="bg-white rounded-3xl shadow-2xl shadow-gray-300/40 p-8 md:p-12 text-center border border-gray-200/50 reveal">
-                    <h2 class="text-3xl md:text-5xl font-bold brand-green">Te digo la verdad..</h2>
-                    <p class="mt-4 text-lg text-gray-600">No quiero que me comprés <span>si no te interesa lo demás</span>. Ahora, si querés dedicarte a trabajar de lo que amás, <span>Ascender es para vos</span></p>
                     
-                    <div class="my-10">
-                        <p class="text-lg text-gray-500">Precio Despues: <span class="line-through">$27,99 USD</span></p>
-                        <p class="text-6xl md:text-8xl font-extrabold brand-green my-2">$23,99 <span class="text-2xl md:text-3xl font-medium text-gray-500">USD</span></p>
-                        <p class="font-semibold text-lg text-green-700">Tenés tiempo hasta el 1° de Noviembre</p>
+                    <div class="mt-6 flex justify-center gap-4 text-xs text-green-100/70 font-medium">
+                        <span class="flex items-center gap-1"><i data-feather="lock" class="w-3 h-3"></i> Pago Seguro</span>
+                        <span class="flex items-center gap-1"><i data-feather="check" class="w-3 h-3"></i> Acceso Instantáneo</span>
                     </div>
-
-                    <a href="https://unlock.ascender.uno" class="w-full max-w-md mx-auto block bg-brand-green text-white font-bold text-xl px-10 py-5 rounded-full hover:bg-brand-green-dark transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-green-900/30">
-                        RESERVAR YA
-                    </a>
-                    <p class="mt-6 text-sm text-gray-500">Pago 100% seguro. Tu acceso se desbloqueará al instante.</p>
                 </div>
+
+                <p class="mt-8 text-sm text-green-200/50 italic relative z-10">
+                    *El precio subirá automáticamente el 1 de Noviembre.
+                </p>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- ========== FAQ (Objection Handling) ========== -->
+    <section class="py-20 bg-brand-accent">
+        <div class="max-w-3xl mx-auto px-6">
+            <h3 class="text-2xl font-bold text-brand-green text-center mb-10">Preguntas Frecuentes</h3>
+            
+            <div class="space-y-4 reveal">
+                <details class="group bg-white rounded-xl border border-gray-200 shadow-sm cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium p-5 marker:content-none hover:bg-gray-50 transition-colors">
+                        <span class="text-gray-800">¿Por qué tan barato ($32.99)?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i data-feather="chevron-down" class="text-gray-400"></i>
+                        </span>
+                    </summary>
+                    <div class="text-gray-600 px-5 pb-5 text-sm leading-relaxed">
+                        Es un precio de <strong>reserva anticipada (Early Bird)</strong>. Queremos premiar a los que toman acción rápido. El valor real del contenido y la comunidad supera los $800, y el precio subirá drásticamente después del lanzamiento oficial.
+                    </div>
+                </details>
+
+                <details class="group bg-white rounded-xl border border-gray-200 shadow-sm cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium p-5 marker:content-none hover:bg-gray-50 transition-colors">
+                        <span class="text-gray-800">¿Qué pasa si no tengo experiencia en ventas?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i data-feather="chevron-down" class="text-gray-400"></i>
+                        </span>
+                    </summary>
+                    <div class="text-gray-600 px-5 pb-5 text-sm leading-relaxed">
+                        Mejor. No tenés vicios ni malas costumbres. Ascender te enseña desde cero a crear ofertas, prospectar y cerrar. Es un sistema paso a paso, no necesitás ser el Lobo de Wall Street.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
 
     <!-- ========== FOOTER ========== -->
-    <footer class="bg-white">
-        <div class="max-w-7xl mx-auto py-12 px-6 sm:px-8 lg:px-12 text-center">
-            <a href="#" class="flex items-center justify-center space-x-2">
-                 <img class="h-12 w-auto" src="Ascender icon.png" alt="Logo Ascender">
-                 <span class="text-2xl font-bold brand-green">Ascender</span>
-            </a>
-            <p class="mt-4 text-gray-500">&copy; 2025 Ascender. Todos los derechos reservados.</p>
+    <footer class="bg-white py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center justify-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-300 mb-4">
+                 <img class="h-8 w-auto grayscale" src="Ascender icon.png" alt="Logo Ascender">
+                 <span class="text-xl font-bold text-gray-500">Ascender</span>
+            </div>
+            <p class="text-sm text-gray-400">&copy; 2025 Ascender. Todos los derechos reservados.</p>
+            <p class="text-xs text-gray-300 mt-2">Creado con estrategia, café y ambición.</p>
         </div>
     </footer>
 
-
     <script>
-        // Inicializar Feather Icons
-        feather.replace();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar Feather Icons
+            feather.replace();
 
-        // Script para animación al hacer scroll (Intersection Observer)
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-visible');
-                    observer.unobserve(entry.target);
+            // Scroll Reveal Observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Sticky Bar Logic
+            let lastScroll = 0;
+            const stickyBar = document.getElementById('sticky-bar');
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                if (currentScroll > lastScroll && currentScroll > 100) {
+                    stickyBar.style.transform = 'translateY(-100%)';
+                } else {
+                    stickyBar.style.transform = 'translateY(0)';
                 }
+                lastScroll = currentScroll;
             });
-        }, {
-            threshold: 0.1
-        });
-
-        revealElements.forEach(el => {
-            observer.observe(el);
         });
     </script>
 </body>
-</html>
+</html> 
