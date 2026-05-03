@@ -1,488 +1,652 @@
+
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desbloquea Ascender | Tu Camino está Incompleto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mi Álbum Mundial 2026</title>
+    <!-- Importamos Poppins de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Preconexión -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Fuente Inter y Playfair Display (para toques de elegancia) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="Ascender icon.png">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Configuración de Tailwind -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            green: '#2E4B43',
-                            dark: '#1F332D',
-                            light: '#E8F5E9',
-                            gold: '#D4AF37',
-                            accent: '#F5F5F0'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    boxShadow: {
-                        'glow': '0 0 40px -10px rgba(46, 75, 67, 0.25)',
-                        'card': '0 20px 40px -15px rgba(0, 0, 0, 0.1)',
-                        'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.3)',
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
-
     <style>
-        /* Estilos personalizados */
-        body {
-            background-color: #FDFBF8;
-            color: #1a202c;
-            -webkit-font-smoothing: antialiased;
+        /* === VARIABLES & RESET (Estilo iOS / Material 3 Expressive) === */
+        :root {
+            --bg-color: #F2F2F7; /* Fondo gris claro típico de iOS */
+            --card-bg: #FFFFFF;
+            --primary: #007AFF; /* Azul iOS */
+            --primary-hover: #0056b3;
+            --success: #34C759; /* Verde iOS */
+            --text-main: #1C1C1E;
+            --text-muted: #8E8E93;
+            --border-radius: 20px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
         }
 
-        .reveal {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent; /* Quita el highlight azul en móviles */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* === PANTALLA DE INICIO (LOGIN) === */
+        #login-view {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            padding: 40px 24px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-card h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #E5E5EA;
+            background-color: #FAFAFA;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            background-color: #FFF;
+        }
+
+        button.btn-primary {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            background-color: var(--primary);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        button.btn-primary:active {
+            transform: scale(0.98);
+            background-color: var(--primary-hover);
+        }
+
+        /* === PANTALLA PRINCIPAL === */
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .header-top h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .header-actions button {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-left: 12px;
+        }
+
+        /* Filtros tipo "Segmented Control" de iOS */
+        #filters {
+            display: flex;
+            background: #E5E5EA;
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .filter-btn {
+            flex: 1;
+            padding: 8px 0;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background: var(--card-bg);
+            color: var(--text-main);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Grilla de Figuritas */
+        main {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .fig-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            min-height: 140px;
+        }
+
+        /* Estado visual: Faltante */
+        .fig-card.missing {
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+
+        .fig-card-header {
+            margin-bottom: 12px;
+        }
+
+        .fig-code {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .fig-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .fig-card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        /* Toggle Switch (Material 3 / iOS) */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #E5E5EA;
+            border-radius: 24px;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            border-radius: 50%;
+            transition: .4s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        input:checked + .slider {
+            background-color: var(--success);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
         }
         
-        .reveal-visible {
-            opacity: 1;
-            transform: translateY(0);
+        input:disabled + .slider {
+            cursor: not-allowed;
         }
 
-        /* Gradientes y Efectos de Texto */
-        .text-gradient {
-            background: linear-gradient(135deg, #2E4B43 0%, #4a7a6c 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Contador de Repetidas */
+        .counter {
+            display: flex;
+            align-items: center;
+            background: var(--bg-color);
+            border-radius: 20px;
+            padding: 2px;
         }
 
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #D4AF37 0%, #b89220 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .counter button {
+            background: transparent;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .counter button:disabled {
+            color: var(--text-muted);
+            cursor: not-allowed;
         }
 
-        /* Barra de Progreso Hipnótica */
-        .progress-bar-stripes {
-            background-image: linear-gradient(45deg,rgba(255,255,255,.2) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.2) 75%,transparent 75%,transparent);
-            background-size: 20px 20px;
-            animation: move-stripes 1s linear infinite;
+        .counter span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
         }
 
-        @keyframes move-stripes {
-            0% { background-position: 0 0; }
-            100% { background-position: 20px 0; }
-        }
-
-        /* Blur elegante para contenido bloqueado */
-        .glass-lock {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        /* Patrón de fondo sutil */
-        .bg-grid-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232E4B43' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+        /* Mensaje ReadOnly */
+        #readonly-banner {
+            background-color: #FF9500;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: none;
         }
     </style>
 </head>
-<body class="antialiased flex flex-col min-h-screen bg-brand-accent">
+<body>
 
-    <!-- Sticky Bar de Urgencia (Scarcity Bias) -->
-    <div class="fixed top-0 w-full z-[60] bg-brand-green text-white text-xs font-semibold py-2 text-center shadow-lg transform transition-transform duration-300" id="sticky-bar">
-        <span class="animate-pulse mr-2">🔥</span> 
-        Los cupos de preventa se están agotando. Asegurá los $32.99 antes de que suba.
+    <!-- MODO SOLO LECTURA BANNER -->
+    <div id="readonly-banner">
+        Estás viendo el álbum de alguien más (Solo lectura)
     </div>
 
-    <!-- ========== HERO SECTION (Zeigarnik Effect + Ego) ========== -->
-    <section class="pt-28 pb-20 relative overflow-hidden bg-white rounded-b-[3rem] shadow-card">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-
-        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
-            
-            <!-- Barra de Progreso "Unfinished Business" -->
-            <div class="bg-white p-6 rounded-2xl shadow-glow border border-gray-100 mb-10 reveal transform hover:scale-[1.01] transition-transform duration-300">
-                <div class="flex justify-between items-end mb-3">
-                    <div class="text-left">
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1">Estado del Estudiante</span>
-                        <span class="text-brand-green font-bold text-lg">Iniciado (Incompleto)</span>
-                    </div>
-                    <span class="text-3xl font-black text-brand-green">20%</span>
-                </div>
-                
-                <div class="h-6 w-full bg-gray-100 rounded-full overflow-hidden shadow-inner p-1">
-                    <div class="h-full bg-gradient-to-r from-green-600 to-brand-green w-[20%] rounded-full shadow-md progress-bar-stripes relative flex items-center justify-end pr-2">
-                        <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                    </div>
-                </div>
-                
-                <p class="text-sm text-gray-500 mt-4 font-medium flex items-center justify-center gap-2">
-                    <i data-feather="alert-circle" class="w-4 h-4 text-orange-500"></i>
-                    <span class="italic">Tu cerebro odia dejar las cosas a medias. Completalo.</span>
-                </p>
-            </div>
-
-            <div class="reveal delay-100">
-                <span class="inline-block py-1 px-4 rounded-full bg-green-50 text-brand-green text-xs font-bold tracking-widest uppercase mb-6 border border-brand-green/10">
-                    Preview Finalizada
-                </span>
-                <h1 class="text-5xl md:text-7xl font-extrabold text-brand-green leading-tight tracking-tight mb-6">
-                    Ya tenés la chispa. <br>
-                    <span class="text-gradient">Te falta el fuego.</span>
-                </h1>
-                <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-600 leading-relaxed font-light">
-                    Viste los Módulos 1 y 2. Ya sabés que esto es real. Pero la motivación sola no paga las cuentas. 
-                    <br><strong class="font-semibold text-brand-green">Sin estrategia de ventas, solo tenés un hobby caro.</strong>
-                </p>
-            </div>
-            
-            <div class="mt-10 reveal delay-200">
-                <a href="#precio-final" class="group relative inline-flex items-center justify-center bg-brand-green text-white font-bold text-xl px-12 py-5 rounded-full hover:bg-brand-dark transition-all duration-300 shadow-xl shadow-brand-green/30 hover:-translate-y-1">
-                    <span class="relative z-10 flex items-center gap-3">
-                        QUIERO TERMINAR LO QUE EMPECÉ
-                        <i data-feather="arrow-down" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i>
-                    </span>
-                </a>
-            </div>
+    <!-- PANTALLA DE INICIO (Ingresar ID) -->
+    <div id="login-view">
+        <div class="login-card">
+            <h1>Tu Álbum 2026</h1>
+            <p>Conectá tu Google Sheet para empezar a gestionar tus figuritas.</p>
+            <input type="text" id="sheet-id-input" placeholder="Pegá el ID de tu Google Sheet acá">
+            <button class="btn-primary" id="btn-ingresar">Ingresar a mi Álbum</button>
         </div>
-    </section>
+    </div>
 
-    <!-- ========== AUTHORITY & STORYTELLING (Relatability Bias) ========== -->
-    <section class="py-24 bg-brand-accent relative">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <!-- Imagen / Visual -->
-                <div class="relative reveal group cursor-default">
-                    <div class="absolute inset-0 bg-brand-green rounded-3xl rotate-3 opacity-10 group-hover:rotate-6 transition-transform duration-500"></div>
-                    <div class="relative bg-white p-2 rounded-3xl shadow-card">
-                         <!-- Placeholder mejorado para la imagen de Juan -->
-                        <img src="juanbondareprofilephoto.jpg" alt="Juan Bondare" class="rounded-2xl w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" onerror="this.src='https://placehold.co/500x600/2E4B43/FDFBF8?text=Juan+Bondare'">
-                        
-                        <!-- Floating Badge -->
-                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl border border-gray-100 flex flex-col items-center">
-                            <span class="text-3xl font-black text-brand-green">+500M</span>
-                            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">Visualizaciones</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Copy de Autoridad -->
-                <div class="reveal delay-100">
-                    <h2 class="text-sm font-bold text-brand-gold uppercase tracking-widest mb-2">Mi Historia Real</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-brand-green mb-6 leading-tight">
-                        "Empecé con un Samsung A03 roto y mucho miedo."
-                    </h3>
-                    <div class="space-y-4 text-gray-600 leading-relaxed">
-                        <p>
-                            No soy un gurú que nació en cuna de oro. Soy un pibe que entendió el juego. 
-                            Me estafaron, fracasé con mi primera agencia y estuve perdido sin saber qué hacer con mi vida.
-                        </p>
-                        <p class="font-medium text-gray-800 border-l-4 border-brand-green pl-4">
-                            Pero descubrí algo: <span class="italic">Tu marca personal es el único activo que nadie te puede quitar.</span>
-                        </p>
-                        <p>
-                            Junto a <strong>Juan Manuel Merodio</strong> (el cerebro detrás de las ventas y el sistema Delta), empaquetamos años de golpes y aprendizajes en <strong>Ascender</strong>. 
-                            No te vendemos humo. Te vendemos el atajo que a nosotros nos hubiera gustado tener.
-                        </p>
-                    </div>
+    <!-- PANTALLA PRINCIPAL (Grilla y Filtros) -->
+    <div id="main-view" class="hidden">
+        <header>
+            <div class="header-top">
+                <h1 id="app-title">Mi Colección</h1>
+                <div class="header-actions">
+                    <button id="btn-share">Compartir</button>
+                    <button id="btn-logout" style="color: #FF3B30;">Salir</button>
                 </div>
             </div>
-        </div>
-    </section>
+            <nav id="filters">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="missing">Faltantes</button>
+                <button class="filter-btn" data-filter="repeated">Repetidas</button>
+            </nav>
+        </header>
 
-    <!-- ========== THE GAP (Curiosity & Deprivation Bias) ========== -->
-    <section class="py-24 bg-white relative">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto reveal mb-16">
-                <span class="text-brand-gold text-5xl font-serif italic mb-4 block">"The Gap"</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-brand-green">Lo que separa a los curiosos de los que facturan</h2>
-                <p class="mt-4 text-gray-600">Lo que viste gratis (Módulos 1-2) es la base. Lo que está bloqueado (Módulos 3-10) es el edificio.</p>
-            </div>
+        <main id="card-grid">
+            <!-- Las tarjetas se renderizan acá por JS -->
+        </main>
+    </div>
 
-            <!-- Grid de Módulos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                
-                <!-- Módulos Vistos (Confirmation Bias) -->
-                <div class="bg-green-50/50 p-6 rounded-2xl border border-green-100 opacity-60 hover:opacity-100 transition-opacity">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-3xl font-black text-green-200">01</span>
-                        <i data-feather="check-circle" class="text-green-600 w-5 h-5"></i>
-                    </div>
-                    <h4 class="font-bold text-brand-green">Mentalidad</h4>
-                    <p class="text-xs text-gray-500 mt-1">Ya sabés por qué hacés esto.</p>
-                </div>
-                
-                <div class="bg-green-50/50 p-6 rounded-2xl border border-green-100 opacity-60 hover:opacity-100 transition-opacity">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-3xl font-black text-green-200">02</span>
-                        <i data-feather="check-circle" class="text-green-600 w-5 h-5"></i>
-                    </div>
-                    <h4 class="font-bold text-brand-green">Fundaciones</h4>
-                    <p class="text-xs text-gray-500 mt-1">Ya tenés la disciplina base.</p>
-                </div>
-
-                <!-- EL ABISMO (Bloqueados) -->
-                
-                <!-- Card Bloqueada Standard -->
-                <div class="relative group p-6 rounded-2xl border border-gray-100 bg-gray-50 overflow-hidden reveal">
-                    <div class="absolute inset-0 glass-lock z-10 flex flex-col items-center justify-center opacity-90 transition-all duration-300 group-hover:opacity-100">
-                        <div class="bg-white p-3 rounded-full shadow-lg mb-2 group-hover:scale-110 transition-transform">
-                            <i data-feather="lock" class="w-5 h-5 text-red-500"></i>
-                        </div>
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Bloqueado</span>
-                    </div>
-                    <div class="filter blur-[3px]">
-                        <span class="text-3xl font-black text-gray-200">03</span>
-                        <h4 class="font-bold text-gray-800 mt-2">Nicho de Mercado</h4>
-                        <p class="text-xs text-gray-500 mt-1">Dejar de hablarle a la pared y hablarle al que paga.</p>
-                    </div>
-                </div>
-
-                <!-- Card Bloqueada Standard -->
-                <div class="relative group p-6 rounded-2xl border border-gray-100 bg-gray-50 overflow-hidden reveal delay-75">
-                    <div class="absolute inset-0 glass-lock z-10 flex flex-col items-center justify-center opacity-90">
-                        <div class="bg-white p-3 rounded-full shadow-lg mb-2">
-                            <i data-feather="lock" class="w-5 h-5 text-red-500"></i>
-                        </div>
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Bloqueado</span>
-                    </div>
-                    <div class="filter blur-[3px]">
-                        <span class="text-3xl font-black text-gray-200">04</span>
-                        <h4 class="font-bold text-gray-800 mt-2">Tu Servicio</h4>
-                        <p class="text-xs text-gray-500 mt-1">Cómo empaquetar tu cerebro.</p>
-                    </div>
-                </div>
-
-                <!-- MÓDULO ESTRELLA (Offers) - Destacado -->
-                <div class="relative group col-span-1 lg:col-span-2 p-8 rounded-2xl border-2 border-brand-green/10 bg-gradient-to-br from-gray-50 to-green-50/30 overflow-hidden reveal delay-100 shadow-lg">
-                    <div class="absolute inset-0 glass-lock z-10 flex flex-col items-center justify-center opacity-90">
-                        <div class="bg-brand-green text-white px-5 py-2 rounded-full shadow-xl mb-3 flex items-center gap-2 transform group-hover:scale-105 transition-transform">
-                            <i data-feather="lock" class="w-4 h-4"></i>
-                            <span class="text-sm font-bold">MÓDULO DE VENTAS (CRÍTICO)</span>
-                        </div>
-                        <span class="text-xs font-bold uppercase tracking-widest text-gray-500">Sin esto, no facturás</span>
-                    </div>
-                    <div class="filter blur-[4px] opacity-60">
-                        <div class="flex items-center gap-4">
-                            <span class="text-6xl font-black text-gray-300">05</span>
-                            <div>
-                                <h4 class="text-2xl font-bold text-brand-green">Ofertas Irresistibles</h4>
-                                <p class="text-sm text-gray-600 mt-1">Psicología aplicada para que el precio sea irrelevante.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Resto de Módulos (Agrupados para efecto de "Mucho Valor") -->
-                <div class="relative group col-span-1 lg:col-span-2 p-8 rounded-2xl border border-gray-100 bg-gray-50 overflow-hidden reveal delay-150 text-center">
-                    <div class="absolute inset-0 glass-lock z-10 flex flex-col items-center justify-center opacity-95">
-                        <i data-feather="layers" class="w-10 h-10 text-gray-400 mb-3"></i>
-                        <h4 class="font-bold text-gray-700 text-lg">+ 5 Módulos Avanzados</h4>
-                        <p class="text-xs text-gray-500 mt-2 max-w-xs mx-auto">Contenido Viral, Setting (Vender por DM), Embudos Automáticos, Sesgos Cognitivos y Escalado.</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Nurturing: Bonus Stack -->
-            <div class="mt-16 bg-brand-green/5 rounded-3xl p-8 md:p-12 text-center border border-brand-green/10 reveal">
-                <h3 class="text-2xl font-bold text-brand-green mb-6">Y además, desbloqueás el Ecosistema Completo:</h3>
-                <div class="flex flex-wrap justify-center gap-4 md:gap-8">
-                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
-                        <i data-feather="users" class="text-brand-green w-5 h-5"></i>
-                        <span class="font-medium text-gray-700">Comunidad Discord</span>
-                    </div>
-                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
-                        <i data-feather="cpu" class="text-brand-green w-5 h-5"></i>
-                        <span class="font-medium text-gray-700">IAs y Prompts</span>
-                    </div>
-                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
-                        <i data-feather="database" class="text-brand-green w-5 h-5"></i>
-                        <span class="font-medium text-gray-700">Plantillas Notion</span>
-                    </div>
-                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
-                        <i data-feather="mic" class="text-brand-green w-5 h-5"></i>
-                        <span class="font-medium text-gray-700">Podcast Privado</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== COST OF INACTION (Loss Aversion) ========== -->
-    <section class="py-20 bg-gray-900 text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-200">El Costo de No Hacer Nada</h2>
-            <p class="text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto">
-                Podés cerrar esta pestaña y volver a tu rutina. Scrollear Instagram, ver cómo otros crecen, y decirte a vos mismo "ya voy a arrancar".
-                <br><br>
-                Pero el tiempo no para. <span class="text-white font-bold">Cada día que pasás sin marca personal, es plata que dejás sobre la mesa.</span>
-                <br>
-                No dejes que tu potencial se oxide.
-            </p>
-        </div>
-    </section>
-
-    <!-- ========== PRICING (Anchor & Urgency) ========== -->
-    <section id="precio-final" class="py-24 bg-white relative">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-gradient-to-br from-brand-green to-brand-dark rounded-[3rem] shadow-2xl p-8 md:p-16 text-center text-white relative overflow-hidden reveal hover:shadow-glow transition-shadow duration-500">
-                
-                <!-- Decoración -->
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-gold opacity-10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-
-                <h2 class="text-3xl md:text-5xl font-extrabold mb-4 relative z-10">
-                    Tu Futuro Vale Más que una Cena.
-                </h2>
-                <p class="text-green-100 text-lg mb-10 relative z-10">
-                    Estás a un click de tener el mapa completo.
-                </p>
-
-                <!-- Pricing Card -->
-                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 max-w-lg mx-auto border border-white/20 relative z-10">
-                    <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 mb-8">
-                        
-                        <!-- Anchor Price -->
-                        <div class="text-center opacity-60">
-                            <p class="text-xs uppercase tracking-widest font-bold mb-1">Valor Real</p>
-                            <p class="text-2xl font-serif line-through decoration-red-400 decoration-2">$870 USD</p>
-                        </div>
-
-                        <!-- Real Price -->
-                        <div class="text-center transform scale-110">
-                            <span class="bg-brand-gold text-brand-dark text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block">Oferta Preventa</span>
-                            <div class="flex items-start justify-center text-white">
-                                <span class="text-2xl font-bold mt-2">$</span>
-                                <span class="text-7xl font-black tracking-tighter">32</span>
-                                <div class="flex flex-col items-start mt-2">
-                                    <span class="text-3xl font-bold">99</span>
-                                    <span class="text-sm font-medium opacity-70">USD</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="https://unlock.ascender.uno/buy/fd49f8e6-cab5-4027-96e0-101c11b435e7" class="w-full block bg-white text-brand-green font-bold text-xl px-8 py-5 rounded-full hover:bg-brand-gold hover:text-white transition-all duration-300 shadow-lg transform hover:-translate-y-1">
-                        DESBLOQUEAR TODO AHORA
-                    </a>
-                    
-                    <div class="mt-6 flex justify-center gap-4 text-xs text-green-100/70 font-medium">
-                        <span class="flex items-center gap-1"><i data-feather="lock" class="w-3 h-3"></i> Pago Seguro</span>
-                        <span class="flex items-center gap-1"><i data-feather="check" class="w-3 h-3"></i> Acceso Instantáneo</span>
-                    </div>
-                </div>
-
-                <p class="mt-8 text-sm text-green-200/50 italic relative z-10">
-                    *El precio subirá automáticamente el 1 de Noviembre.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== FAQ (Objection Handling) ========== -->
-    <section class="py-20 bg-brand-accent">
-        <div class="max-w-3xl mx-auto px-6">
-            <h3 class="text-2xl font-bold text-brand-green text-center mb-10">Preguntas Frecuentes</h3>
-            
-            <div class="space-y-4 reveal">
-                <details class="group bg-white rounded-xl border border-gray-200 shadow-sm cursor-pointer">
-                    <summary class="flex justify-between items-center font-medium p-5 marker:content-none hover:bg-gray-50 transition-colors">
-                        <span class="text-gray-800">¿Por qué tan barato ($32.99)?</span>
-                        <span class="transition group-open:rotate-180">
-                            <i data-feather="chevron-down" class="text-gray-400"></i>
-                        </span>
-                    </summary>
-                    <div class="text-gray-600 px-5 pb-5 text-sm leading-relaxed">
-                        Es un precio de <strong>reserva anticipada (Early Bird)</strong>. Queremos premiar a los que toman acción rápido. El valor real del contenido y la comunidad supera los $800, y el precio subirá drásticamente después del lanzamiento oficial.
-                    </div>
-                </details>
-
-                <details class="group bg-white rounded-xl border border-gray-200 shadow-sm cursor-pointer">
-                    <summary class="flex justify-between items-center font-medium p-5 marker:content-none hover:bg-gray-50 transition-colors">
-                        <span class="text-gray-800">¿Qué pasa si no tengo experiencia en ventas?</span>
-                        <span class="transition group-open:rotate-180">
-                            <i data-feather="chevron-down" class="text-gray-400"></i>
-                        </span>
-                    </summary>
-                    <div class="text-gray-600 px-5 pb-5 text-sm leading-relaxed">
-                        Mejor. No tenés vicios ni malas costumbres. Ascender te enseña desde cero a crear ofertas, prospectar y cerrar. Es un sistema paso a paso, no necesitás ser el Lobo de Wall Street.
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== FOOTER ========== -->
-    <footer class="bg-white py-12 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center justify-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-300 mb-4">
-                 <img class="h-8 w-auto grayscale" src="Ascender icon.png" alt="Logo Ascender">
-                 <span class="text-xl font-bold text-gray-500">Ascender</span>
-            </div>
-            <p class="text-sm text-gray-400">&copy; 2025 Ascender. Todos los derechos reservados.</p>
-            <p class="text-xs text-gray-300 mt-2">Creado con estrategia, café y ambición.</p>
-        </div>
-    </footer>
-
+    <!-- LÓGICA DE LA APP -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Inicializar Feather Icons
-            feather.replace();
+        // === ESTADO GLOBAL DE LA APLICACIÓN ===
+        const appState = {
+            sheetId: null,
+            isReadOnly: false,
+            currentFilter: 'all', // 'all', 'missing', 'repeated'
+            data: [] // Acá vivirá el JSON de las figuritas
+        };
 
-            // Scroll Reveal Observer
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('reveal-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        // Elementos del DOM
+        const views = {
+            login: document.getElementById('login-view'),
+            main: document.getElementById('main-view')
+        };
+        const inputSheetId = document.getElementById('sheet-id-input');
+        const btnIngresar = document.getElementById('btn-ingresar');
+        const btnLogout = document.getElementById('btn-logout');
+        const btnShare = document.getElementById('btn-share');
+        const readonlyBanner = document.getElementById('readonly-banner');
+        const cardGrid = document.getElementById('card-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
 
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        // === 1. INICIALIZACIÓN ===
+        function initApp() {
+            // Chequear parámetros en la URL (Modo Social)
+            const urlParams = new URLSearchParams(window.location.search);
+            const sheetFromUrl = urlParams.get('sheet');
 
-            // Sticky Bar Logic
-            let lastScroll = 0;
-            const stickyBar = document.getElementById('sticky-bar');
-            
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                if (currentScroll > lastScroll && currentScroll > 100) {
-                    stickyBar.style.transform = 'translateY(-100%)';
+            if (sheetFromUrl) {
+                // Modo visitante (Solo Lectura)
+                appState.sheetId = sheetFromUrl;
+                appState.isReadOnly = true;
+                readonlyBanner.style.display = 'block';
+                btnLogout.style.display = 'none'; // No tiene sentido salir si sos visitante
+                btnShare.style.display = 'none'; 
+                document.getElementById('app-title').innerText = "Álbum Visitante";
+                loadDataAndStart();
+            } else {
+                // Modo Dueño: Chequear LocalStorage
+                const savedSheetId = localStorage.getItem('mi_album_sheet_id');
+                if (savedSheetId) {
+                    appState.sheetId = savedSheetId;
+                    loadDataAndStart();
                 } else {
-                    stickyBar.style.transform = 'translateY(0)';
+                    // Mostrar Login
+                    showView('login');
                 }
-                lastScroll = currentScroll;
+            }
+        }
+
+        // Mostrar/Ocultar pantallas
+        function showView(viewName) {
+            views.login.classList.add('hidden');
+            views.main.classList.add('hidden');
+            views[viewName].classList.remove('hidden');
+        }
+
+        // === 2. SIMULACIÓN DE FETCH (API) ===
+        // Acá harías el GET a tu Google Apps Script. Por ahora simulamos un delay y mock data.
+        function loadDataAndStart() {
+            // Simulamos carga
+            cardGrid.innerHTML = '<p style="text-align:center; width: 100%; color: var(--text-muted);">Cargando figuritas...</p>';
+            showView('main');
+
+            setTimeout(() => {
+                // Mock de datos (Simulando lo que devuelve el Sheet)
+                appState.data = [
+                    { codigo: "ARG-01", jugador: "Emiliano Martínez", pegada: true, repetidas: 2 },
+                    { codigo: "ARG-02", jugador: "Nahuel Molina", pegada: false, repetidas: 0 },
+                    { codigo: "ARG-03", jugador: "Cuti Romero", pegada: true, repetidas: 0 },
+                    { codigo: "ARG-10", jugador: "Lionel Messi", pegada: false, repetidas: 0 },
+                    { codigo: "BRA-10", jugador: "Vinícius Jr.", pegada: true, repetidas: 5 },
+                    { codigo: "FRA-07", jugador: "Kylian Mbappé", pegada: false, repetidas: 1 }, // Raro, pero la tiene para cambiar y no la pegó
+                    { codigo: "URU-09", jugador: "Darwin Núñez", pegada: true, repetidas: 0 }
+                ];
+                renderCards();
+            }, 800);
+        }
+
+        // === 3. RENDERIZADO DE LA UI ===
+        function renderCards() {
+            cardGrid.innerHTML = ''; // Limpiamos
+
+            // Aplicar Filtros
+            let filteredData = appState.data;
+            if (appState.currentFilter === 'missing') {
+                filteredData = appState.data.filter(fig => !fig.pegada);
+            } else if (appState.currentFilter === 'repeated') {
+                filteredData = appState.data.filter(fig => fig.repetidas > 0);
+            }
+
+            if(filteredData.length === 0) {
+                cardGrid.innerHTML = '<p style="text-align:center; width: 100%; color: var(--text-muted);">No hay figuritas para mostrar en esta vista.</p>';
+                return;
+            }
+
+            // Crear HTML para cada figurita
+            filteredData.forEach(fig => {
+                // Lógica de estado visual: Gris si no la tiene y no tiene repetidas
+                const isMissingVisual = !fig.pegada && fig.repetidas === 0;
+                const disableControls = appState.isReadOnly ? 'disabled' : '';
+
+                const cardHtml = `
+                    <div class="fig-card ${isMissingVisual ? 'missing' : ''}">
+                        <div class="fig-card-header">
+                            <span class="fig-code">${fig.codigo}</span>
+                            <span class="fig-name">${fig.jugador}</span>
+                        </div>
+                        <div class="fig-card-actions">
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-pegada" data-code="${fig.codigo}" ${fig.pegada ? 'checked' : ''} ${disableControls}>
+                                <span class="slider"></span>
+                            </label>
+                            <div class="counter">
+                                <button class="btn-dec" data-code="${fig.codigo}" ${disableControls}>-</button>
+                                <span>${fig.repetidas}</span>
+                                <button class="btn-inc" data-code="${fig.codigo}" ${disableControls}>+</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                cardGrid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // === 4. LÓGICA DE INTERACCIÓN (Actualización Optimista) ===
+        // Usamos Event Delegation en el contenedor principal para mejorar rendimiento
+        cardGrid.addEventListener('click', (e) => {
+            if (appState.isReadOnly) return; // Si es visitante, chau, no hace nada.
+
+            const target = e.target;
+            
+            // Botón Incrementar Repetidas
+            if (target.classList.contains('btn-inc')) {
+                const code = target.getAttribute('data-code');
+                updateData(code, 'repetidas', 1);
+            }
+            
+            // Botón Decrementar Repetidas
+            if (target.classList.contains('btn-dec')) {
+                const code = target.getAttribute('data-code');
+                updateData(code, 'repetidas', -1);
+            }
+        });
+
+        // Event listener separado para el checkbox (Toggle)
+        cardGrid.addEventListener('change', (e) => {
+            if (appState.isReadOnly) return;
+            
+            if (e.target.classList.contains('toggle-pegada')) {
+                const code = e.target.getAttribute('data-code');
+                const isChecked = e.target.checked;
+                updateData(code, 'pegada', isChecked);
+            }
+        });
+
+        // Función para actualizar el estado local
+        function updateData(codigo, columna, valorOIncremento) {
+            const figIndex = appState.data.findIndex(f => f.codigo === codigo);
+            if (figIndex === -1) return;
+
+            let nuevoValor;
+
+            if (columna === 'repetidas') {
+                nuevoValor = appState.data[figIndex].repetidas + valorOIncremento;
+                if (nuevoValor < 0) nuevoValor = 0; // No podemos tener repetidas negativas
+                appState.data[figIndex].repetidas = nuevoValor;
+            } else if (columna === 'pegada') {
+                nuevoValor = valorOIncremento; // true o false
+                appState.data[figIndex].pegada = nuevoValor;
+            }
+
+            // Actualización optimista: re-renderizamos inmediatamente
+            renderCards();
+
+            // Disparamos el guardado debounced
+            debouncedGuardarCambios(codigo, columna, nuevoValor);
+        }
+
+        // === 5. GUARDADO ASÍNCRONO CON DEBOUNCE ===
+        // Utilidad Debounce para no saturar la red si el usuario hace "Tap Tap Tap" rápido
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        const guardarCambios = (codigo, columna, nuevoValor) => {
+            console.log(`📡 GUARDANDO EN SHEETS -> Código: ${codigo} | Columna: ${columna} | Nuevo Valor: ${nuevoValor}`);
+            
+            /* ===================================================================
+            TODO: ACÁ VA EL FETCH A TU GOOGLE APPS SCRIPT
+            ===================================================================
+            const apiURL = 'https://script.google.com/macros/s/TU_ID_DE_SCRIPT/exec';
+            
+            fetch(apiURL, {
+                method: 'POST', // Usamos POST porque Apps Script lo maneja mejor en CORS
+                mode: 'no-cors', // Fundamental para que no tire error en páginas estáticas
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sheetId: appState.sheetId,
+                    codigo: codigo,
+                    columna: columna,
+                    valor: nuevoValor
+                })
+            })
+            .then(() => console.log('✅ Guardado con éxito en background'))
+            .catch(error => console.error('❌ Error al guardar:', error));
+            ===================================================================
+            */
+        };
+
+        // Creamos la versión "debounced" de la función (espera 1 segundo de inactividad)
+        const debouncedGuardarCambios = debounce(guardarCambios, 1000);
+
+
+        // === 6. EVENTOS DE MENÚ Y NAVEGACIÓN ===
+        
+        // Manejo de Filtros
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Cambiar estado activo visual
+                filterBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Aplicar filtro y re-renderizar
+                appState.currentFilter = e.target.getAttribute('data-filter');
+                renderCards();
             });
         });
+
+        // Ingresar (Login)
+        btnIngresar.addEventListener('click', () => {
+            const sheetId = inputSheetId.value.trim();
+            if (sheetId !== '') {
+                localStorage.setItem('mi_album_sheet_id', sheetId);
+                appState.sheetId = sheetId;
+                loadDataAndStart();
+            } else {
+                alert('Por favor, ingresá el ID de tu Google Sheet.');
+            }
+        });
+
+        // Salir (Logout)
+        btnLogout.addEventListener('click', () => {
+            if(confirm('¿Seguro que querés desconectar tu álbum de este dispositivo?')) {
+                localStorage.removeItem('mi_album_sheet_id');
+                appState.sheetId = null;
+                appState.data = [];
+                inputSheetId.value = '';
+                showView('login');
+            }
+        });
+
+        // Compartir (Copia link con el ID)
+        btnShare.addEventListener('click', () => {
+            const shareUrl = `${window.location.origin}${window.location.pathname}?sheet=${appState.sheetId}`;
+            
+            // Intentar usar la API moderna del portapapeles
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('¡Link copiado! Pasáselo a un amigo para negociar repetidas. 🤝');
+                });
+            } else {
+                // Fallback clásico
+                const dummy = document.createElement('input');
+                document.body.appendChild(dummy);
+                dummy.value = shareUrl;
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+                alert('¡Link copiado! Pasáselo a un amigo para negociar repetidas. 🤝');
+            }
+        });
+
+        // Arrancar la app
+        initApp();
+
     </script>
 </body>
-</html> 
+</html>
